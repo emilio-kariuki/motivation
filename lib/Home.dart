@@ -1,10 +1,12 @@
 
 
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:motivation/model.dart';
 
-Future<User> getQuote() async {
+Future<Map<String, dynamic>> getQuote() async {
     Dio dio = Dio();
 
     final response = await dio.get('https://zenquotes.io/api/quotes');
@@ -16,13 +18,16 @@ Future<User> getQuote() async {
       // Map responseBody = response.data;
       // List jsonResponse = json.decode(response.data);
       // List responseJson = json.decode(response.data);
-      return User.fromJson(response.data);
+       Map<String, dynamic> data = jsonDecode(response.data);
+      return data;
     } else {
       // If the server did not return a 200 OK response,
       // then throw an exception.
       throw Exception('Failed to load album');
     }
   }
+
+
 
 
 class Home extends StatefulWidget {
@@ -37,7 +42,7 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
-    futureAlbum = getQuote();
+    futureAlbum = getQuote() as Future<User>;
   }
   
   @override
