@@ -23,11 +23,4 @@ class User {
         c: json["c"],
         h: json["h"],
     );
-
-    Map<String, dynamic> toJson() => {
-        "q": q,
-        "a": a,
-        "c": c,
-        "h": h,
-    };
 }
