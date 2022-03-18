@@ -1,5 +1,3 @@
-
-
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
@@ -7,28 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:motivation/model.dart';
 
 Future<Map<String, dynamic>> getQuote() async {
-    Dio dio = Dio();
+  Dio dio = Dio();
 
-    final response = await dio.get('https://zenquotes.io/api/quotes');
-    // List responseJson = json.decode(response.data);
-
-    if (response.statusCode == 200) {
-      // If the server did return a 200 OK response,
-      // then parse the JSON.
-      // Map responseBody = response.data;
-      // List jsonResponse = json.decode(response.data);
-      // List responseJson = json.decode(response.data);
-       Map<String, dynamic> data = jsonDecode(response.data);
-      return data;
-    } else {
-      // If the server did not return a 200 OK response,
-      // then throw an exception.
-      throw Exception('Failed to load album');
-    }
-  }
-
-
-
+  final response = await dio.get('https://zenquotes.io/api/quotes');
+  // List responseJson = json.decode(response.data);
+  Map<String, dynamic> data = jsonDecode(response.data);
+  print(data);
+  return data;
+}
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -42,30 +26,30 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
-    futureAlbum = getQuote() as Future<User>;
+    futureAlbum = getQuote() as Future<User> ;
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('Fetch Data Example'),
-        ),
-        body: Center(
-          child: FutureBuilder<User>(
-            future: futureAlbum,
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                return Text(snapshot.data!.q);
-              } else if (snapshot.hasError) {
-                return Text('${snapshot.error}');
-              }
+      appBar: AppBar(
+        title: const Text('Fetch Data Example'),
+      ),
+      body: Center(
+        child: FutureBuilder<User>(
+          future: futureAlbum,
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return Text(snapshot.data!.q);
+            } else if (snapshot.hasError) {
+              return Text('${snapshot.error}');
+            }
 
-              // By default, show a loading spinner.
-              return const CircularProgressIndicator();
-            },
-          ),
+            // By default, show a loading spinner.
+            return const CircularProgressIndicator();
+          },
         ),
-      );
+      ),
+    );
   }
 }
