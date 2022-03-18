@@ -8,12 +8,14 @@ Future<User> getQuote() async {
     Dio dio = Dio();
 
     final response = await dio.get('https://zenquotes.io/api/quotes');
+    // List responseJson = json.decode(response.data);
 
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,
       // then parse the JSON.
       // Map responseBody = response.data;
       // List jsonResponse = json.decode(response.data);
+      // List responseJson = json.decode(response.data);
       return User.fromJson(response.data);
     } else {
       // If the server did not return a 200 OK response,
