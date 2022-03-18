@@ -6,7 +6,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:motivation/model.dart';
 
-Future<User> getQuote() async {
+Future<List<User>> getQuote() async {
     Dio dio = Dio();
 
     final response = await dio.get('https://zenquotes.io/api/quotes');
@@ -19,7 +19,7 @@ Future<User> getQuote() async {
       // List jsonResponse = json.decode(response.data);
       // List responseJson = json.decode(response.data);
       //  Map<String, dynamic> data = jsonDecode(response.data);
-      return User.fromJson(json.decode(response.data));
+      return List<User>.from(json.decode(response.data).map((x) => User.fromJson(x)));
     } else {
       // If the server did not return a 200 OK response,
       // then throw an exception.
@@ -42,7 +42,7 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
-    futureAlbum = getQuote();
+    futureAlbum = getQuote() as Future<User>;
   }
   
   @override
