@@ -5,22 +5,24 @@
 import 'dart:convert';
 
 class User {
-    User({
-        required this.q,
-        required this.a,
-        required this.c,
-        required this.h,
-    });
+  User({
+    required this.q,
+    required this.a,
+    required this.c,
+    required this.h,
+  });
 
-    String q;
-    String a;
-    String c;
-    String h;
+  String q;
+  String a;
+  String c;
+  String h;
 
-    factory User.fromJson(Map<String, dynamic> json) => User(
-        q: json["q"],
-        a: json["a"],
-        c: json["c"],
-        h: json["h"],
+  factory User.fromJson(Map<String, dynamic> json) {
+    return User(
+      q: json["q"],
+      a: json["a"],
+      c: json["c"],
+      h: json["h"],
     );
+  }
 }
