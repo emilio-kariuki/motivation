@@ -2,15 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:motivation/model.dart';
 
-class Home extends StatefulWidget {
-  const Home({Key? key}) : super(key: key);
-
-  @override
-  State<Home> createState() => _HomeState();
-}
-
-class _HomeState extends State<Home> {
-  Future<User> getQuote() async {
+Future<User> getQuote() async {
     Dio dio = Dio();
 
     final response = await dio.get('https://zenquotes.io/api/quotes');
@@ -26,6 +18,22 @@ class _HomeState extends State<Home> {
     }
   }
 
+
+class Home extends StatefulWidget {
+  const Home({Key? key}) : super(key: key);
+
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  late Future<User> futureAlbum;
+  @override
+  void initState() {
+    super.initState();
+    futureAlbum = getQuote();
+  }
+  
   @override
   Widget build(BuildContext context) {
     return Container();
