@@ -1,3 +1,5 @@
+
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:motivation/model.dart';
@@ -10,6 +12,8 @@ Future<User> getQuote() async {
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,
       // then parse the JSON.
+      // Map responseBody = response.data;
+      // List jsonResponse = json.decode(response.data);
       return User.fromJson(response.data);
     } else {
       // If the server did not return a 200 OK response,
