@@ -45,7 +45,7 @@ class _HomeState extends State<Home> {
                   itemBuilder: (context, index) {
             return Container(
               height: 50,
-              child: const Text("hi"),
+              child: Text(_model![index].q,),
               // color: Colors.red,
             );
                   },
