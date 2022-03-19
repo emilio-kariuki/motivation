@@ -17,11 +17,7 @@ class _HomeState extends State<Home> {
   void initState() {
     super.initState();
     user = Api().getQuote();
-
   }
-
-  
-  
 
   @override
   Widget build(BuildContext context) {
@@ -34,18 +30,7 @@ class _HomeState extends State<Home> {
           future: user,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-                List<User>? data = snapshot.data;
-                return ListView.builder(
-                    itemCount: data?.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return Container(
-                        height: 75,
-                        color: Colors.white,
-                        child: Center(
-                          child: Text(data![index].q),
-                        ),
-                      );
-                    });
+              print("data got");
             } else if (snapshot.hasError) {
               return Text('${snapshot.error}');
             }
