@@ -28,11 +28,11 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  late Future<User> futureAlbum;
+  late Future<User> user;
   @override
   void initState() {
     super.initState();
-    futureAlbum = getQuote();
+    user = getQuote();
   }
 
   @override
@@ -43,7 +43,7 @@ class _HomeState extends State<Home> {
       ),
       body: Center(
         child: FutureBuilder<User>(
-          future: futureAlbum,
+          future: user,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               return Text(snapshot.data!.q);
