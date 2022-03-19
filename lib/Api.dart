@@ -6,13 +6,13 @@ import 'package:motivation/model.dart';
 import 'package:http/http.dart' as http;
 
 class Api {
-  static Future<User> getQuote() async {
+  static Future<Map<String, dynamic>> getQuote() async {
     final response = await http.get(Uri.parse("https://zenquotes.io/api/quotes"));
 
     if (response.statusCode == 200) {
       // If the server returns an OK response, then parse the JSON.
-      
-      return User.fromJson(json.decode(response.body));
+       Map<String, dynamic> data = User.fromJson(json.decode(response.body)) as Map<String, dynamic>;
+      return data;
     } else {
       // If the response was umexpected, throw an error.
       throw Exception('Failed to load post');
