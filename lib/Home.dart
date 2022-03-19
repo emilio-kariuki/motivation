@@ -10,6 +10,7 @@ Future<User> getQuote() async {
 
   if (response.statusCode == 200) {
     // If the server returns an OK response, then parse the JSON.
+    List<Map<String, dynamic>> map = [];
     return User.fromJson(json.decode(response.body)) as Future<User>;
     // var extractedData =
     //     List<Map<String, dynamic>>.from(jsonDecode(response.body));
