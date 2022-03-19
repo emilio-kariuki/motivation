@@ -7,7 +7,7 @@ import 'package:motivation/model.dart';
 import 'package:http/http.dart' as http;
 
 class Api {
-  Future<User> getQuote() async {
+  Future<List<User>?> getQuote() async {
     final response =
         await http.get(Uri.parse("https://zenquotes.io/api/quotes"));
     var userModel = null;
