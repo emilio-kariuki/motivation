@@ -22,7 +22,14 @@ class _HomeState extends State<Home> {
     getData();
   }
 
-  getData() {}
+  getData() async {
+    _model = (await Api().getQuote()) as Future<User>?;
+    if (_model != null) {
+      setState(() {
+        isLoaded = true;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
