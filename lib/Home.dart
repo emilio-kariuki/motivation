@@ -5,13 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:motivation/Api.dart';
 import 'package:motivation/model.dart';
 
-Future<User> getQuote() async {
+Future<List<Map<String, dynamic>>> getQuote() async {
   final response = await http.get(Uri.parse("https://zenquotes.io/api/quotes"));
 
   if (response.statusCode == 200) {
     // If the server returns an OK response, then parse the JSON.
     List<Map<String, dynamic>> map = [];
-    return User.fromJson(json.decode(response.body)) as Future<User>;
+    map = List<Map<String, dynamic>>.from(jsonDecode(response.body));
+    return map;
     // var extractedData =
     //     List<Map<String, dynamic>>.from(jsonDecode(response.body));
     // return extractedData;
@@ -33,7 +34,7 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
-    user = getQuote();
+    user = getQuote() as Future<User>;
   }
 
   @override
