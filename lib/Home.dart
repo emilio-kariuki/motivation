@@ -37,7 +37,7 @@ class _HomeState extends State<Home> {
 final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Fetch Data Example'),
+        title: const Text('Quotes'),
       ),
       body: Center(
 
