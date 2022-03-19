@@ -38,6 +38,7 @@ class _HomeState extends State<Home> {
         title: const Text('Fetch Data Example'),
       ),
       body: Center(
+        
           child: Visibility(
             visible: isLoaded,
             child: ListView.builder(
