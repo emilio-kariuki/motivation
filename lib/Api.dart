@@ -16,6 +16,7 @@ class Api {
       // If the call to the server was successful, parse the JSON
       var jsonString = response.body;
       var jsonMap = json.decode(jsonString);
+      User.fromJson(jsonMap);
     } else {
       throw Exception('Failed to load post');
     }
