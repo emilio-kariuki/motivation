@@ -12,7 +12,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  Future<User>? _model;
+  late Future<User> _model;
 
   @override
   void initState() {
@@ -27,7 +27,7 @@ class _HomeState extends State<Home> {
         title: const Text('Fetch Data Example'),
       ),
       body: Center(
-        child: FutureBuilder<User>(
+        child: FutureBuilder(
           future: _model,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
