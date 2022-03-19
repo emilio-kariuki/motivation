@@ -45,7 +45,7 @@ class _HomeState extends State<Home> {
                   itemCount: _model?.length,
                   itemBuilder: (context, index) {
             return Container(
-              height: 50,
+              height: 60,
               child: Column(
                 children: [
                   Text(_model![index].q,),
