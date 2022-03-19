@@ -12,20 +12,16 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  late Future<User>? user;
+  late Future<List<User>> user;
   @override
   void initState() {
     super.initState();
-    // user = getQuote();
-    getData();
+    user = Api().getQuote();
+
   }
 
-  getData() async {
-    user = (await Api().getQuote()) as Future<User>?;
-    if (user != null) {
-      print("we have the data");
-    }
-  }
+  
+  
 
   @override
   Widget build(BuildContext context) {
@@ -34,11 +30,22 @@ class _HomeState extends State<Home> {
         title: const Text('Fetch Data Example'),
       ),
       body: Center(
-        child: FutureBuilder<User>(
+        child: FutureBuilder<List<User>>(
           future: user,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              return Text(snapshot.data!.q);
+                List<User>? data = snapshot.data;
+                return ListView.builder(
+                    itemCount: data?.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Container(
+                        height: 75,
+                        color: Colors.white,
+                        child: Center(
+                          child: Text(data![index].q),
+                        ),
+                      );
+                    });
             } else if (snapshot.hasError) {
               return Text('${snapshot.error}');
             }
