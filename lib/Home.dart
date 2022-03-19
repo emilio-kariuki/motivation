@@ -31,7 +31,7 @@ class _HomeState extends State<Home> {
           future: _model,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              return ListView.builder(itemBuilder: (context, int index) {
+              return ListView.builder(itemBuilder: (context,index) {
                 return Container(
                   height: 100,
                   color: Colors.red,
