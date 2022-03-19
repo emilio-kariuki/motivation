@@ -1,18 +1,18 @@
+// ignore_for_file: unused_import
+
 import 'dart:convert';
-import "package:flutter/material.dart";
 import 'package:dio/dio.dart';
 import "package:flutter/material.dart";
 import 'package:motivation/model.dart';
 import 'package:http/http.dart' as http;
 
 class Api {
-  static Future<Map<String, dynamic>> getQuote() async {
+  static Future<User> getQuote() async {
     final response = await http.get(Uri.parse("https://zenquotes.io/api/quotes"));
 
     if (response.statusCode == 200) {
       // If the server returns an OK response, then parse the JSON.
-       Map<String, dynamic> data = User.fromJson(json.decode(response.body)) as Map<String, dynamic>;
-      return data;
+       return User.fromJson(json.decode(response.body));
     } else {
       // If the response was umexpected, throw an error.
       throw Exception('Failed to load post');
