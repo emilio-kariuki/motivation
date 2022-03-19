@@ -31,8 +31,12 @@ class _HomeState extends State<Home> {
           future: _model,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              return Text(snapshot.data!.q);
-              //print("data got");
+              return ListView.builder(itemBuilder: (context, int index) {
+                return Container(
+                  height: 100,
+                  color: Colors.red,
+                );
+              });
             } else if (snapshot.hasError) {
               return Text('${snapshot.error}');
             }
@@ -40,7 +44,7 @@ class _HomeState extends State<Home> {
             // By default, show a loading spinner.
             return const CircularProgressIndicator();
           },
-        ),
+        )
       ),
     );
   }
