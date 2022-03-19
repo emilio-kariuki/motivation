@@ -12,7 +12,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  Future<User>? _model;
+  List<User>? _model;
   var isLoaded = false;
 
   @override
@@ -23,7 +23,7 @@ class _HomeState extends State<Home> {
   }
 
   getData() async {
-    _model = (await Api().getQuote()) as Future<User>?;
+    _model = await Api().getQuote();
     if (_model != null) {
       setState(() {
         isLoaded = true;
@@ -38,27 +38,21 @@ class _HomeState extends State<Home> {
         title: const Text('Fetch Data Example'),
       ),
       body: Center(
-          child: FutureBuilder(
-        future: _model,
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            return ListView.builder(
-                itemCount: 10,
-                itemBuilder: (context, index) {
-                  return Container(
-                    height: 100,
-                    child: Text("hi"),
-                    // color: Colors.red,
-                  );
-                });
-          } else if (snapshot.hasError) {
-            return Text('${snapshot.error}');
-          }
-
-          // By default, show a loading spinner.
-          return const CircularProgressIndicator();
-        },
-      )),
+          child: Visibility(
+            visible: isLoaded,
+            child: ListView.builder(
+                  itemCount: _model?.length,
+                  itemBuilder: (context, index) {
+            return Container(
+              height: 50,
+              child: const Text("hi"),
+              // color: Colors.red,
+            );
+                  },
+                ),
+            replacement: const Center(child: CircularProgressIndicator()),
+          )
+      ),
     );
   }
 }
