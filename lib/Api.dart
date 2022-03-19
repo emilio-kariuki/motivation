@@ -7,15 +7,17 @@ import 'package:motivation/model.dart';
 import 'package:http/http.dart' as http;
 
 class Api {
-  static Future<User> getQuote() async {
-    final response = await http.get(Uri.parse("https://zenquotes.io/api/quotes"));
+  Future<List<User>?> getQuote() async {
+  final response = await http.get(Uri.parse("https://zenquotes.io/api/quotes"));
 
-    if (response.statusCode == 200) {
-      // If the server returns an OK response, then parse the JSON.
-       return User.fromJson(json.decode(response.body));
-    } else {
-      // If the response was umexpected, throw an error.
-      throw Exception('Failed to load post');
-    }
+  if (response.statusCode == 200) {
+    
+    Iterable l = json.decode(response.body);
+    List<User> posts = List<User>.from(l.map((model)=> User.fromJson(model)));
+    return posts;
+    
+  } else {
+    throw Exception('Failed to load post');
   }
+}
 }
