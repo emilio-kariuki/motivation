@@ -38,7 +38,7 @@ class _HomeState extends State<Home> {
         title: const Text('Fetch Data Example'),
       ),
       body: Center(
-        
+
           child: Visibility(
             visible: isLoaded,
             child: ListView.builder(
@@ -46,7 +46,12 @@ class _HomeState extends State<Home> {
                   itemBuilder: (context, index) {
             return Container(
               height: 50,
-              child: Text(_model![index].q,),
+              child: Column(
+                children: [
+                  Text(_model![index].q,),
+                  Text(_model![index].a,),
+                ],
+              ),
               // color: Colors.red,
             );
                   },
