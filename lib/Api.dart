@@ -16,9 +16,7 @@ class Api {
       if (response.statusCode == 200) {
         // If the call to the server was successful, parse the JSON
         var jsonString = response.body;
-        var jsonMap = json.decode(jsonString);
-        userModel = User.fromJson(jsonMap);
-        // return userModel;
+        return userFromJson(jsonString);
       } else {
         throw Exception('Failed to load post');
       }
