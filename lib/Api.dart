@@ -12,14 +12,19 @@ class Api {
         await http.get(Uri.parse("https://zenquotes.io/api/quotes"));
     var userModel = null;
 
-    if (response.statusCode == 200) {
-      // If the call to the server was successful, parse the JSON
-      var jsonString = response.body;
-      var jsonMap = json.decode(jsonString);
-      userModel = User.fromJson(jsonMap);
+    try {
+      if (response.statusCode == 200) {
+        // If the call to the server was successful, parse the JSON
+        var jsonString = response.body;
+        var jsonMap = json.decode(jsonString);
+        userModel = User.fromJson(jsonMap);
+        // return userModel;
+      } else {
+        throw Exception('Failed to load post');
+      }
+    } catch (e) {
       return userModel;
-    } else {
-      throw Exception('Failed to load post');
     }
+    return userModel;
   }
 }
